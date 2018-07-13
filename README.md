@@ -51,6 +51,10 @@ This will not be workable for almost all React apps, but switching to functional
 
 While experimenting with various Rails-React-Redux apps, we found that simply importing from lodash 4.17.10 sometimes causes a ReferenceError that is also resolved by downgrading to uglifier 4.1.12. However, we've been unable to consistently reproduce this behavior.
 
+## Node on development environment
+
+We were unable to reproduce any of this behavior in a development environment, even if the development environment is configured to use uglifier.
+
 ## Acknowledgments
 
 These results were obtained in collaboration with [@moeroach94](https://github.com/moeroach94), [@BCrawfordScott](https://github.com/BCrawfordScott), and [@OscarAlvarez8830](https://github.com/OscarAlvarez8830).
