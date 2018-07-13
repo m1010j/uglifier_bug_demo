@@ -8,7 +8,7 @@ TypeError: l is not a function
 
 See [here](https://uglifier-bug-demo.herokuapp.com/) for a live version of the app.
 
-This repository also contains five branches that reflect fixes, each of which is sufficient on its own to avoid the error on Heroku:
+This repository also contains six branches that reflect fixes, each of which is sufficient on its own to avoid the error on Heroku:
 
 ## 1. [Downgrade to uglifier 4.1.12](https://github.com/m1010j/uglifier_bug_demo/tree/downgrade-uglifier)
 
@@ -18,7 +18,11 @@ This is the most straightforward fix for most situations.
 
 Replacing `config.assets.js_compressor = :uglifier` with `config.assets.js_compressor = Uglifier.new(harmony: true)` in `config/environments/production.rb` also works.
 
-## 3. [Don't use class syntax to define React components](https://github.com/m1010j/uglifier_bug_demo/tree/es5-component)
+## 3. [Use development mode in postinstall script](https://github.com/m1010j/uglifier_bug_demo/tree/mode-development)
+
+This works, but it results in a minified code warning on Heroku.
+
+## 4. [Don't use class syntax to define React components](https://github.com/m1010j/uglifier_bug_demo/tree/es5-component)
 
 This is much less convenient, but avoiding ES6 class syntax when defining React components also seems to work. Note that using ES6 class syntax to define classes that don't extend `React.Component` doesn't seem to cause any issues. [Here](https://github.com/m1010j/uglifier_bug_demo/blob/es5-component/frontend/components/some_component.jsx)'s the class-less version of a React component used in this app:
 
@@ -39,11 +43,11 @@ SomeComponent.prototype.render = function() {
 export default SomeComponent;
 ```
 
-## 4. [Don't use connected components](https://github.com/m1010j/uglifier_bug_demo/tree/no-container)
+## 5. [Don't use connected components](https://github.com/m1010j/uglifier_bug_demo/tree/no-container)
 
 This will not be workable in the context of a React app that uses Redux for state management, but not using connected React components seems to work, even if those components use ES6 class syntax.
 
-## 5. [Only use functional components](https://github.com/m1010j/uglifier_bug_demo/tree/functional-component)
+## 6. [Only use functional components](https://github.com/m1010j/uglifier_bug_demo/tree/functional-component)
 
 This will not be workable for almost all React apps, but switching to functional components seems to work, even if those components are connected.
 
