@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import SomeComponentContainer from './some_component_container';
+import SomeComponent from './some_component';
 
 export const Root = ({ store }) => {
   return (
     <Provider store={store}>
-      <SomeComponentContainer />
+      <SomeComponent />
     </Provider>
   );
 };
